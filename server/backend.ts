@@ -6,7 +6,7 @@ const { Pool } = pg
 @GenezioDeploy()
 export class BackendService {
   pool = new Pool({
-    connectionString: process.env.NEON_POSTGRES_URL,
+    connectionString: process.env.TEAM_NFT_DATABASE_URL,
     ssl: true,
   });
 
