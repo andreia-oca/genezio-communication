@@ -1,40 +1,26 @@
-import { GenezioDeploy, GenezioMethod } from "@genezio/types";
-import fetch from "node-fetch";
-
-type SuccessResponse = {
-  status: "success";
-  country: string;
-  lat: number;
-  lon: number;
-  city: string;
-};
-
-type ErrorResponse = {
-  status: "fail";
-};
+import { GenezioDeploy, GenezioMethod, GnzAuth, GnzContext } from "@genezio/types";
+import pg from 'pg'
+import TeamMember from "./models/member";
+const { Pool } = pg
 
 @GenezioDeploy()
 export class BackendService {
-  constructor() {}
+  pool = new Pool({
+    connectionString: process.env.NEON_POSTGRES_URL,
+    ssl: true,
+  });
 
   @GenezioMethod()
-  async hello(name: string) {
-    const ipLocation: SuccessResponse | ErrorResponse = await fetch(
-      "http://ip-api.com/json/"
-    )
-      .then((res) => res.json() as Promise<SuccessResponse>)
-      .catch(() => ({ status: "fail" }));
-
-    if (ipLocation.status === "fail") {
-      return `Hello ${name}! Failed to get the server location :(`;
+  @GnzAuth()
+  async getMember(context: GnzContext): Promise<TeamMember | null> {
+    const userEmail = context.user?.email;
+    try {
+      const result = await this.pool.query('SELECT * FROM team_members WHERE email = $1', [userEmail]);
+      const user = result.rows[0];
+      return user || null;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return null;
     }
-
-    const formattedTime = new Date().toLocaleString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-
-    return `Hello ${name}! This response was served from ${ipLocation.city}, ${ipLocation.country} (${ipLocation.lat}, ${ipLocation.lon}) at ${formattedTime}`;
   }
 }
