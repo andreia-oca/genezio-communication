@@ -1,0 +1,16 @@
+name: genezio-team-nft
+region: us-east-1
+language: ts
+cloudProvider: genezio
+classes: []
+frontend:
+  path: client/dist
+scripts:
+  preFrontendDeploy: npm install @genezio-sdk/genezio-team-nft_us-east-1 && npm
+    install && npm run build
+  preBackendDeploy: npm install
+  preStartLocal: cd server && npm install
+workspace:
+  backend: server
+  frontend: client
+packageManager: npm
