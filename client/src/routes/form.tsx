@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const QuestionnaireForm = () => {
   // Questions and options based on the CSV content
   const questions = [
+    { question: 'Vorbesti mai mult despre', options: ['Rezultatele pe care vrei sa le ai','Vise si aspiratii','Sentimente si experiente de viata','Fapte si cifre']},
     { question: 'Ritm de vorbire', options: ['Foarte rapid', 'Rapid', 'Domol', 'Moderat'] }, 
     { question: 'Stil de comunicare', options: ['Direct la subiect', 'Animat, colorat', 'Calm, rational', 'Specific, concis'] },
     { question: 'Imbracaminte', options: ['Haine de firma, rafinat, tinute formale', 'Culori aprinse, la moda, informal', 'Culori estompate, casual', 'Conservativ, haine clasice, tinuta business'] },
     { question: 'Motivat de', options: ['Rezultate', 'Applauze', 'Aprobare', 'Activitate'] },
     { question: 'Excelezi in conditii de', options: ['Presiune, schimbare', 'Stimulare, distractie', 'Lucru in echipa, sprijin', 'Acuratete, fapte, informatie'] },
-    // Add more questions and options here as needed
+    { question: 'Expresia furiei', options: ['Nerabdator, agresiv','Usor frustrabil, comportament exploziv','Devii usor confuz','Abordare rationala']},
+    { question: 'Stil de lucru,', options: ['Intens, mai multe lucruri odata','Adori libertatea si interactiunea cu multi oameni','Flexibil, cooperativ, vrei sa fi de ajutor celorlalti','Profund, atentie la detalii, un singur lucru odata']},
+    { question: 'La birou', options: ['Birou ordonat si organizat pe prioritati','Gadgeturi, lucruri interesante','Mementouri sentimentale, suveniruri','Carti de specialitate la indemana']},
+    { question: 'Ritm de lucru', options: ['Tumultos, foarte rapid','Te plictisesti repede, treci de la una la alta','Calculat, nu tolerezi usor presiunea','Metodic, ritm constant',]},
+    { question: 'Urasti', options: ['Sa pierzi vremea','Sa reinventezi roata','Confruntarea','Sa nu ai dreptate']},
+    { question: 'Rol in echipa', options: ['Leader - din nevoia de a controla','Relationare - nevoia de a fi in centrul atentiei','Impaciuitor - nevoia de a se simti inclus','Furnizor de informatii - nevoia de a fi exact']},
+    { question: 'Vrea sa ti se aprecieze', options: ['Productivitatea','Contributia','Implicarea','Calitatea muncii']},
+    { question: 'Recompensa', options: ['Putere','Recunoastere','Aprobare','Responsabilitate']}, 
   ];
 
   const [answers, setAnswers]: [{[key: string]: number}, any] = useState({});
@@ -23,6 +33,8 @@ const QuestionnaireForm = () => {
     console.log(answers); // Here you might want to send the answers to a backend server or store them in your state for further processing.
     console.log(totals);   
   };
+
+
 
   const calculateTotal = () => {
     const total = { column1: 0, column2: 0, column3: 0, column4: 0 };
@@ -40,10 +52,19 @@ const QuestionnaireForm = () => {
     setTotals({...total})
   }
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e : any) => {
     e.preventDefault();
 
     calculateTotal();
+    //call backend function to store results and date
+
+    try {
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
     console.log(answers); // Here you might want to send the answers to a backend server or store them in your state for further processing.
     console.log(totals);
 };

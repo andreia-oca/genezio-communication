@@ -14,7 +14,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { AuthService } from "@genezio/auth";
 import MyNavbar from './views/navbar';
-import QuestionnaireForm from './views/form';
+import QuestionnaireForm from './routes/form';
 
 AuthService.getInstance().setTokenAndRegion("0-ceofjz54pxa2vg6ve3rsi6pe640vxteq", "us-east-1");
 
@@ -26,7 +26,6 @@ const router = createBrowserRouter([
       <>
         <MyNavbar /> {}
         <SecretView />
-        <QuestionnaireForm />
       </>
       </div>
     ),
@@ -38,6 +37,16 @@ const router = createBrowserRouter([
       <>
         <MyNavbar /> {}
         <Login />
+      </>
+      </div>
+    ),
+  },{
+    path: "/taketest",
+    element: (
+      <div className="dark-bg">
+      <>
+        <MyNavbar /> {}
+        <QuestionnaireForm />
       </>
       </div>
     ),
