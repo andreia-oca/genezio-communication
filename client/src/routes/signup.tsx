@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./styles.css";
 import { useNavigate } from 'react-router-dom';
 import { AuthService } from '@genezio/auth';
+import { Button } from 'react-bootstrap';
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -26,36 +27,43 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form onSubmit={handleSubmit} className="mt-4">
+      <div className="form-group">
         <label htmlFor="name">Name:</label>
         <input
           type="text"
           id="name"
+          className="form-control"
           value={name}
-          onChange={e => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
+          className="form-control"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="password">Password:</label>
         <input
           type="password"
           id="password"
+          className="form-control"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit">{ loading ? "Loading..." : "Sign Up" }</button>
-      <button onClick={() => navigate('/login')}>Go to login</button>
+      <Button type="submit" className="btn btn-primary" disabled={loading}>
+        {loading ? 'Loading...' : 'Sign Up'}
+      </Button>
+      <Button className="btn btn-primary" onClick={() => navigate('/login')}>
+        Go to login
+      </Button>
     </form>
   );
 };

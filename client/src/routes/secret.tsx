@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BackendService, TeamMember } from "@genezio-sdk/genezio-team-nft_us-east-1"
 import { useNavigate } from 'react-router-dom';
-import { AuthService } from '@genezio/auth';
 
 const SecretView: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -24,26 +24,21 @@ const SecretView: React.FC = () => {
     fetchMember();
   }, [navigate]);
 
-  const logout = async () => {
-    try {
-        await AuthService.getInstance().logout();
-        navigate('/login');
-    } catch (error) {
-        console.error(error);
-    }
-  }
+
 
   return (
-    <div className="form-container">
-      <h2>Member Details</h2>
+    <div className="container mt-4">
+      <h2 className="mb-4">Member Details</h2>
       {loading && <p>Loading...</p>}
-      {member && (
+      {member ? (
         <>
-          <p>Name: {member.fullname}</p>
-          <p>Email: {member.email}</p>
-          {member.image_url && <img src={member.image_url} alt="Member" style={{ maxWidth: '100px' }} />}
-          <button onClick={logout}>Logout</button>
+          <p><strong>Name:</strong> {member.fullname}</p>
+          <p><strong>Email:</strong> {member.email}</p>
+          <p><strong>Workshop Results:</strong> Panther {member.panther_percentage}%, Peacock {member.peacock_percentage}%, Dolphin {member.dolphin_percentage}%, Owl {member.owl_percentage}%</p>
+          {member.image_url && <img src={member.image_url} alt="Member" className="img-fluid rounded-circle mb-3" />}
         </>
+      ) : (
+        !loading && <p>Unfortunately, you have not taken part in the communication workshop!</p>
       )}
     </div>
   );

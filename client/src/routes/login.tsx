@@ -3,6 +3,7 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import "./styles.css";
 import { useNavigate } from 'react-router-dom';
 import { AuthService } from '@genezio/auth';
+import { Button } from 'react-bootstrap';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -42,26 +43,36 @@ const handleGoogleLogin = async (credentialResponse: CredentialResponse) => {
 };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form onSubmit={handleSubmit} className="mt-4">
+      <div className="form-group">
         <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
+          className="form-control"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="password">Password:</label>
         <input
           type="password"
           id="password"
+          className="form-control"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit">{ loginLoading ? "Loading..." : "Login" } </button>
+      <Button type="submit" variant="primary" disabled={loginLoading}>
+        {loginLoading ? 'Loading...' : 'Login'}
+      </Button>
+      <Button type="submit" variant="primary" onClick={() => navigate('/signup')}>
+        Create an account
+      </Button>
+
+      OR
+
       { googleLoginLoading ? <>Loading...</> :  <GoogleLogin
         onSuccess={credentialResponse => {
           handleGoogleLogin(credentialResponse);
@@ -70,8 +81,8 @@ const handleGoogleLogin = async (credentialResponse: CredentialResponse) => {
           console.log('Login Failed');
         }}
       />}
-      <button onClick={() => navigate('/signup')}>Create an account</button>
-      </form>
+
+    </form>
   );
 };
 

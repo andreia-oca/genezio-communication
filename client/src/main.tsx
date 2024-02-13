@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import SecretView from './routes/secret';
 import Login from './routes/login';
@@ -12,21 +13,43 @@ import Signup from './routes/signup';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { AuthService } from "@genezio/auth";
+import MyNavbar from './views/navbar';
 
 AuthService.getInstance().setTokenAndRegion("0-ceofjz54pxa2vg6ve3rsi6pe640vxteq", "us-east-1");
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SecretView />,
+    element: (
+      <div className="dark-bg">
+      <>
+        <MyNavbar /> {}
+        <SecretView />
+      </>
+      </div>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <div className="dark-bg">
+      <>
+        <MyNavbar /> {}
+        <Login />
+      </>
+      </div>
+    ),
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: (
+      <div className="dark-bg">
+      <>
+        <MyNavbar /> {}
+        <Signup />
+      </>
+       </div>
+    ),
   },
 ]);
 
