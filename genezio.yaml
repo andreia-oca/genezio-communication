@@ -4,12 +4,11 @@ language: ts
 cloudProvider: genezio
 scripts:
   preBackendDeploy: npm install
-  preFrontendDeploy: npm install @genezio-sdk/genezio-team-nft_us-east-1 && npm
-    install && npm run build
+  preFrontendDeploy: npm install @genezio-sdk/genezio-team-nft_us-east-1 && npm install && npm run build
   preStartLocal: cd server && npm install
 frontend:
   path: client/dist
-  subdomain: amethyst-exact-chicken
+  subdomain: genezio-communication 
 packageManager: npm
 workspace:
   backend: server
