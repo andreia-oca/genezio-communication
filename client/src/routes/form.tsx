@@ -73,6 +73,26 @@ const QuestionnaireForm = () => {
   // Placeholder for where you might calculate totals if applicable
 //   let totals = { column1: 0, column2: 0, column3: 0, column4: 0 };
 
+  // const addNewResult = async () => {
+  //   try {
+  //     const user = await AuthService.getInstance().userInfo();
+  //     const member:TeamMember = {
+  //       id: 0,
+  //       email: user.email,
+  //       fullname: user.name ?? "",
+  //       image_url: "",
+  //       panther_percentage: totals.column1 / 14 * 100,
+  //       owl_percentage: totals.column2 / 14 * 100,
+  //       dolphin_percentage: totals.column3 / 14 * 100,
+  //       peacock_percentage: totals.column4 / 14 * 100,
+  //     }
+  //     await BackendService.addNewResults(member);
+  //     console.log('Results added');
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
   return (
     <form onSubmit={handleSubmit}>
       <table>

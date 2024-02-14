@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+// import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import "./styles.css";
 import { useNavigate } from 'react-router-dom';
 import { AuthService } from '@genezio/auth';

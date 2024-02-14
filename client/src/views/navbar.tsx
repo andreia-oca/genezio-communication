@@ -11,7 +11,10 @@ const MyNavbar: React.FC = () => {
     const checkLoginStatus = async () => {
         try {
             const user = await AuthService.getInstance().userInfo();
-            setIsLoggedIn(true);
+            if (user) {
+                console.log('User is logged in');
+                setIsLoggedIn(true);
+            }
         } catch (error) {
             setIsLoggedIn(false);
         }

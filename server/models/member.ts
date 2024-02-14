@@ -7,7 +7,7 @@ type TeamMember={
     owl_percentage?: number;
     dolphin_percentage?: number;
     peacock_percentage?: number;
-    updated_at:string;
+    updated_at?:string;
   }
 
   export default TeamMember;

@@ -23,4 +23,40 @@ export class BackendService {
       return null;
     }
   }
+
+  @GenezioMethod()
+  @GnzAuth()
+  async addNewResults(context: GnzContext, member: TeamMember): Promise<boolean> {
+    const userEmail = context.user?.email;
+
+    if (!userEmail && userEmail !== member.email) {
+      return false;
+    }
+
+    try {
+      const currentDate = new Date().toISOString(); // Get the current date in ISO format
+
+      const queryString = `
+        INSERT INTO team_members (email, fullname, image_url, panther_percentage, owl_percentage, dolphin_percentage, peacock_percentage, updated_at)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `;
+
+      await this.pool.query(queryString, [
+        member.email,
+        member.fullname,
+        member.image_url,
+        member.panther_percentage,
+        member.owl_percentage,
+        member.dolphin_percentage,
+        member.peacock_percentage,
+        currentDate,
+      ]);
+
+      return true;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return false;
+    }
+  return true;
+  }
 }
