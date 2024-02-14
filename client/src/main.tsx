@@ -24,8 +24,13 @@ const router = createBrowserRouter([
     element: (
       <div className="dark-bg">
       <>
-        <MyNavbar /> {}
-        <SecretView />
+      <div className="mt-4"> {/* Add margin to the top */}
+          <MyNavbar />
+        </div>
+
+        <div className="mt-4">
+          <SecretView />
+        </div>
       </>
       </div>
     ),

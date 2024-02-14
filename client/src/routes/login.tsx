@@ -8,7 +8,7 @@ import { Button } from 'react-bootstrap';
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [loginLoading, setLoginLoading] = useState(false);
-  const [googleLoginLoading, setGoogleLoginLoading] = useState(false);
+  // const [googleLoginLoading, setGoogleLoginLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -26,21 +26,21 @@ const Login: React.FC = () => {
     setLoginLoading(false);
 }
 
-const handleGoogleLogin = async (credentialResponse: CredentialResponse) => {
-  console.log(credentialResponse);
-  setGoogleLoginLoading(true);
+// const handleGoogleLogin = async (credentialResponse: CredentialResponse) => {
+//   console.log(credentialResponse);
+//   setGoogleLoginLoading(true);
 
-  try {
-      await AuthService.getInstance().googleRegistration(credentialResponse.credential!)
+//   try {
+//       await AuthService.getInstance().googleRegistration(credentialResponse.credential!)
 
-      console.log('Login Success');
-      navigate('/');
-  } catch(error) {
-      console.log('Login Failed', error);
-      alert('Login Failed');
-  }
-  setGoogleLoginLoading(false);
-};
+//       console.log('Login Success');
+//       navigate('/');
+//   } catch(error) {
+//       console.log('Login Failed', error);
+//       alert('Login Failed');
+//   }
+//   setGoogleLoginLoading(false);
+// };
 
   return (
     <form onSubmit={handleSubmit} className="mt-4">
@@ -70,17 +70,6 @@ const handleGoogleLogin = async (credentialResponse: CredentialResponse) => {
       <Button type="submit" variant="primary" onClick={() => navigate('/signup')}>
         Create an account
       </Button>
-
-      OR
-
-      { googleLoginLoading ? <>Loading...</> :  <GoogleLogin
-        onSuccess={credentialResponse => {
-          handleGoogleLogin(credentialResponse);
-        }}
-        onError={() => {
-          console.log('Login Failed');
-        }}
-      />}
 
     </form>
   );

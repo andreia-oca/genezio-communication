@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -6,7 +7,7 @@ const QuestionnaireForm = () => {
   // Questions and options based on the CSV content
   const questions = [
     { question: 'Vorbesti mai mult despre', options: ['Rezultatele pe care vrei sa le ai','Vise si aspiratii','Sentimente si experiente de viata','Fapte si cifre']},
-    { question: 'Ritm de vorbire', options: ['Foarte rapid', 'Rapid', 'Domol', 'Moderat'] }, 
+    { question: 'Ritm de vorbire', options: ['Foarte rapid', 'Rapid', 'Domol', 'Moderat'] },
     { question: 'Stil de comunicare', options: ['Direct la subiect', 'Animat, colorat', 'Calm, rational', 'Specific, concis'] },
     { question: 'Imbracaminte', options: ['Haine de firma, rafinat, tinute formale', 'Culori aprinse, la moda, informal', 'Culori estompate, casual', 'Conservativ, haine clasice, tinuta business'] },
     { question: 'Motivat de', options: ['Rezultate', 'Applauze', 'Aprobare', 'Activitate'] },
@@ -18,7 +19,7 @@ const QuestionnaireForm = () => {
     { question: 'Urasti', options: ['Sa pierzi vremea','Sa reinventezi roata','Confruntarea','Sa nu ai dreptate']},
     { question: 'Rol in echipa', options: ['Leader - din nevoia de a controla','Relationare - nevoia de a fi in centrul atentiei','Impaciuitor - nevoia de a se simti inclus','Furnizor de informatii - nevoia de a fi exact']},
     { question: 'Vrea sa ti se aprecieze', options: ['Productivitatea','Contributia','Implicarea','Calitatea muncii']},
-    { question: 'Recompensa', options: ['Putere','Recunoastere','Aprobare','Responsabilitate']}, 
+    { question: 'Recompensa', options: ['Putere','Recunoastere','Aprobare','Responsabilitate']},
   ];
 
   const [answers, setAnswers]: [{[key: string]: number}, any] = useState({});
@@ -31,7 +32,7 @@ const QuestionnaireForm = () => {
     //await new Promise((resolve, reject) => setTimeout(resolve, 1000))
     calculateTotal();
     console.log(answers); // Here you might want to send the answers to a backend server or store them in your state for further processing.
-    console.log(totals);   
+    console.log(totals);
   };
 
 
@@ -104,7 +105,7 @@ const QuestionnaireForm = () => {
           </tr>
         </tbody>
       </table>
-      <button type="submit">Submit</button>
+      <Button variant="primary" type="submit">Submit</Button>
     </form>
   );
 };
